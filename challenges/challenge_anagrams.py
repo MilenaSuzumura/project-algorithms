@@ -1,16 +1,17 @@
-def sort_list(list_character: list, start: int, end: int):
-    if end > start:
-        metade = len(list_character) // 2
-        primeira_metade = list_character[metade:]
-        segunda_metade = list_character[:metade]
-        sort_list(primeira_metade, 0, len(primeira_metade) - 1)
-        sort_list(segunda_metade, 0, len(primeira_metade) - 1)
-    return list_character
+def sort_list(characters: list[str]):
+    for i in range(len(characters)):
+        min = i
+
+        for j in range(i + 1, len(characters)):
+            if characters[j] < characters[min]:
+                min = j
+        characters[min], characters[i] = characters[i], characters[min]
+    return characters
 
 
 def list_strings(word: str):
     list_string = list(word.lower())
-    sort_word = sort_list(list_string, 0, len(list_string) - 1)
+    sort_word = sort_list(list_string)
     return sort_word
 
 
