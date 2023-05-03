@@ -1,20 +1,11 @@
-def same_string(first_list: list, second_list: list):
-    for index in len(first_list):
-        if first_list[index] != second_list[index]:
-            return False
-
-    return True
-
-
-def sort_list(list_character: list):
-    sort_character = []
-
-    for index in len(list_character):
-        for lower in sort_character:
-            if lower > list_character[index + 1]:
-                sort_character.append(list_character[index + 1])
-
-    return sort_character
+def sort_list(list_character: list, start: int, end: int):
+    if end > start:
+        metade = len(list_character) // 2
+        primeira_metade = list_character[metade:]
+        segunda_metade = list_character[:metade]
+        sort_list(primeira_metade, 0, len(primeira_metade) - 1)
+        sort_list(segunda_metade, 0, len(primeira_metade) - 1)
+    return list_character
 
 
 def list_strings(word: str):
@@ -25,10 +16,12 @@ def list_strings(word: str):
 
 def is_anagram(first_string, second_string):
     if not first_string or not second_string:
-        return ('', '', False)
+        return (first_string, second_string, False)
 
     list_first_string = list_strings(first_string)
     list_second_string = list_strings(second_string)
-    validate = same_string(list_first_string, list_second_string)
-
-    return (list_second_string, list_first_string, validate)
+    return (
+        list_second_string,
+        list_first_string,
+        list_first_string == list_second_string
+    )
